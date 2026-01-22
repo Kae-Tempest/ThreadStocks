@@ -1,0 +1,7 @@
+[submodule "api"]
+	path = ./api
+	url = git@github.com:Kae-Tempest/ThreadStocks-API.git
+
+[submodule "web"]
+	path = ./web
+	url = git@github.com:Kae-Tempest/ThreadStocks-WEB.git
