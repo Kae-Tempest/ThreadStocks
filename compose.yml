@@ -12,6 +12,8 @@ services:
     depends_on:
       - api
       - frontend
+    networks:
+      - threadStocks
 
   db:
     image: postgres:16-alpine
@@ -30,6 +32,8 @@ services:
     env_file:
       - ./.env
     restart: always
+    networks:
+      - threadStocks
     healthcheck:
       test: [ "CMD", "pg_isready" ]
       timeout: 5s
@@ -47,12 +51,17 @@ services:
     ports:
       - "8080:8080"
     tty: true
+    networks:
+      - threadStocks
+      - docker-monitoring_public
 
   frontend:
     build:
       context: ./web
       dockerfile: Dockerfile
     container_name: web
+    networks:
+      - threadStocks
     depends_on:
       - api
     ports:
@@ -63,3 +72,11 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  threadStocks:
+    driver: bridge
+    name: threadStocks
+  docker-monitoring_public:
+    external: true
+    name: docker-monitoring_public
