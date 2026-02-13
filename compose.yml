@@ -50,6 +50,8 @@ services:
       - ./api/.env
     ports:
       - "8080:8080"
+    volumes:
+      - ./api:/app
     tty: true
     networks:
       - threadStocks
